@@ -14,10 +14,15 @@ enum InputSelectors {
     sortSelectorChecked = '.btn-check[checked]',
     search = '#search',
 }
+enum ButtonSelectors {
+    nextPage = '#load-more',
+    search = '#search-submit',
+}
 
 const moviesSortSelector: NodeListOf<HTMLInputElement> = document.querySelectorAll(InputSelectors.sortSelector);
 let moviesSortSelectorActive = getHTMLElement(document, InputSelectors.sortSelectorChecked) as HTMLInputElement;
 const searchInput = getHTMLElement(document, InputSelectors.search) as HTMLInputElement;
+const searchButton = getHTMLElement(document, ButtonSelectors.search) as HTMLButtonElement;
 
 renderMoviesPage(moviesSortSelectorActive.id as SortParams, { page: START_PAGE });
 
@@ -30,4 +35,14 @@ moviesSortSelector.forEach((button) => {
             searchInput.value = '';
         }
     });
+});
+
+searchButton.addEventListener('click', async () => {
+    const searchValue = searchInput.value;
+    if (searchValue) {
+        await renderMoviesPage('search', {
+            page: START_PAGE,
+            query: searchValue,
+        });
+    }
 });
