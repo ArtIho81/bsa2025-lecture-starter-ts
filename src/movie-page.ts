@@ -1,5 +1,5 @@
 import { QueryParams, Search, SortParams, getMovies } from './api';
-import { IMG_URL, Tags } from './config';
+import { IMG_URL, START_PAGE, Tags } from './config';
 import { getHTMLElement, MovieInfo, responseMapper } from './helpers';
 
 enum MovieCardSelectors {
@@ -27,7 +27,9 @@ const fillMovieCard = (item: MovieInfo) => {
 };
 
 export const renderMoviesPage = async (list: SortParams | Search, queryParams: QueryParams): Promise<void> => {
-    moviesContainer.innerHTML = '';
+    if (queryParams.page === START_PAGE || !queryParams.page) {
+        moviesContainer.innerHTML = '';
+    }
     const moviesOnPage = await getMovies(list, queryParams);
     const moviesInfo = responseMapper(moviesOnPage.results);
     const moviesCard: Node[] = moviesInfo.map(fillMovieCard);
