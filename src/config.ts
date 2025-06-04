@@ -8,4 +8,9 @@ export enum Tags {
     svg = 'svg',
 }
 
+export enum Actions {
+    click = 'click',
+    change = 'change',
+}
+
 export const START_PAGE = 1;
