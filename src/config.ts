@@ -7,3 +7,5 @@ export enum Tags {
     img = 'img',
     svg = 'svg',
 }
+
+export const START_PAGE = 1;
