@@ -6,6 +6,7 @@ import { getHTMLElement } from './helpers';
 import { Actions, START_PAGE } from './config';
 import { renderMoviesPage } from './movies-page';
 import { SortParams } from './api';
+import { renderFavoriteMovies } from './favorite-movie';
 
 // TODO render your app here
 
@@ -54,3 +55,5 @@ loadMoreButton.addEventListener(Actions.click, async () => {
     currentPage += 1;
     await renderMoviesPage(searchValue ? 'search' : sort, { page: currentPage, query: searchValue });
 });
+
+renderFavoriteMovies();

@@ -42,9 +42,20 @@ const createSearchUrl = (search: Search, queryParams: QueryParams): string => {
     return `${API_URL}${search}/movie${query}`;
 };
 
+const createFavoriteUrl = (id: number): string => `${API_URL}movie/${id}?${API_KEY}`;
+
 export const getMovies = async (list: SortParams | Search, queryParams: QueryParams): Promise<ResponseMovies> => {
     const url = list === 'search' ? createSearchUrl(list, queryParams) : createSortUrl(list, queryParams);
     const res = await fetch(url);
     const data: ResponseMovies = await res.json();
+
+    return data;
+};
+
+export const getMovie = async (id: number): Promise<ResponseResults> => {
+    const url = createFavoriteUrl(id);
+    const res = await fetch(url);
+    const data: ResponseResults = await res.json();
+
     return data;
 };

@@ -13,4 +13,10 @@ export enum Actions {
     change = 'change',
 }
 
+export enum MovieCardSelectors {
+    container = '#film-container',
+    cardText = '.card-text',
+    releaseDate = '.text-muted',
+}
+
 export const START_PAGE = 1;

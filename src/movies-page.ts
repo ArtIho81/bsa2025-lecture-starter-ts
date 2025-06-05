@@ -1,13 +1,8 @@
 import { QueryParams, Search, SortParams, getMovies } from './api';
-import { IMG_URL, START_PAGE, Tags , Actions } from './config';
+import { IMG_URL, START_PAGE, Tags, Actions, MovieCardSelectors } from './config';
 import { getHTMLElement, MovieInfo, responseMapper } from './helpers';
 import { fillingColor, toggleFavoriteMovie } from './favorite-movie';
-
-enum MovieCardSelectors {
-    container = '#film-container',
-    cardText = '.card-text',
-    releaseDate = '.text-muted',
-}
+import { createRandomMovieBanner } from './random-movie';
 
 const MOVIE_ID_ATTRIBUTE = 'movie-id';
 
@@ -38,6 +33,7 @@ export const renderMoviesPage = async (list: SortParams | Search, queryParams: Q
         moviesContainer.innerHTML = '';
     }
     const moviesOnPage = await getMovies(list, params);
+    createRandomMovieBanner(moviesOnPage.results);
     const moviesInfo = responseMapper(moviesOnPage.results);
     const moviesCard: Node[] = moviesInfo.map(fillMovieCard);
     moviesCard.map((item) => moviesContainer.appendChild(item));
