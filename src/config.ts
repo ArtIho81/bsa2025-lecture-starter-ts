@@ -19,4 +19,8 @@ export enum MovieCardSelectors {
     releaseDate = '.text-muted',
 }
 
+export enum LocalStorage {
+    favoriteMovies = 'favorite-movies',
+}
+
 export const START_PAGE = 1;

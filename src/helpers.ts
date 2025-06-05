@@ -23,3 +23,13 @@ export class MovieInfo {
 }
 
 export const responseMapper = (data: ResponseResults[]): MovieInfo[] => data.map((item) => new MovieInfo(item));
+
+export const localStorageActions = {
+    getDataFromLocalStorage: (item: string): string[] => {
+        const data = localStorage.getItem(item);
+        return data ? JSON.parse(data) : [];
+    },
+    setDataToLocalStorage: (item: string, data: string[]): void => {
+        localStorage.setItem(item, JSON.stringify(data));
+    },
+};
